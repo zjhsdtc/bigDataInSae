@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="http://twitter.github.io/bootstrap/assets/ico/favicon.png">
+    <style id="holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style></head>
+
+</head>
+<body>
+    <script>
+
+        //获取下拉列表选中项的文本
+        function getSelectedText(name){
+        var obj = document.getElementById(name);
+            for(var i=0; i<obj.length; i++){
+               if(obj[i].selected == true){
+                return obj[i].innerText;      //关键是通过option对象的innerText属性获取到选项文本
+               }
+            }
+        }
+
+        //获取下拉列表选中项的值
+        function getSelectedValue(name){
+            var obj = document.getElementById(name);
+            return obj.value;      //如此简单，直接用其对象的value属性便可获取到
+        }
+
+        function getNextDictionary(name){
+            var obj = document.getElementById(name);
+            for(var i=0; i<obj.length; i++){
+                if(obj[i].selected == true){
+                    return "/?date=" + obj[i].innerText;
+                }
+            }
+        }
+
+    </script>
+    <div align="center">
+
+        <h1>{{ totalnum }} dates is legal to show!!!</h1>
+
+        <form name="input" action="/" method="get">
+            <select id="clea" name="date">
+            {% for item in datelist %}
+                <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+            </select>
+            <input class="btn btn-large btn-primary" type="submit" value="生成图表" />
+        </form>
+
+        {% if picname %}
+            <p><img src="/site_media/{{ picname }}.png"/></p>
+        {% endif %}
+        <!--<input type="button" value="所选文本" onclick="alert(getSelectedText('clea'));"/>
+        <input type="button" value="所选值" onclick="alert(getSelectedValue('clea'));"/>-->
+        <!--<a class="btn btn-large btn-primary" href="/showdiagram" onclick="alert(getNextDictionary('clea'))">显示图表</a>-->
+
+    </div>
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+</body>
+</html>
